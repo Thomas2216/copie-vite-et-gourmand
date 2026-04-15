@@ -1,0 +1,11 @@
+services:
+    - type: web
+      name: vite-et-gourmand
+      runtime: php
+      buildCommand: chmod +x build.sh && ./build.sh
+      startCommand: php -S 0.0.0.0:$PORT -t public/
+      envVars:
+          - key: APP_ENV
+            value: prod
+          - key: APP_SECRET
+            generateValue: true
