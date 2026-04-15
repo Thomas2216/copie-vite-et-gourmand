@@ -3,7 +3,8 @@ nixPkgs = ["php82", "php82Packages.composer", "nodejs", "autoconf", "gcc", "gnum
 
 [phases.install]
 cmds = [
-    "yes '' | pecl install mongodb || true",
+    "yes '' | pecl install mongodb",
+    "find / -name 'mongodb.so' 2>/dev/null || echo 'mongodb.so NOT FOUND'",
     "composer install --ignore-platform-reqs --optimize-autoloader --no-interaction"
 ]
 
