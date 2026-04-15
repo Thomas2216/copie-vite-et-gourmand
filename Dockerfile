@@ -21,4 +21,6 @@ RUN rm -f .env.local.php
 
 EXPOSE 8080
 
+RUN rm -f .env .env.local .env.prod .env.local.php
+
 CMD ["sh", "-c", "php -S 0.0.0.0:8080 -t public/"]
