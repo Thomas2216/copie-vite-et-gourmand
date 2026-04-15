@@ -1,8 +1,8 @@
 FROM php:8.2-fpm
 
 RUN apt-get update && apt-get install -y \
-    libicu-dev libssl-dev git unzip \
-    && docker-php-ext-install pdo pdo_mysql opcache \
+    libicu-dev libssl-dev git unzip libpq-dev \
+    && docker-php-ext-install pdo pdo_mysql pdo_pgsql opcache \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
     && pecl install mongodb \
