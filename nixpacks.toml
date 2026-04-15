@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["php83", "php83Packages.composer", "php83Packages.mongodb"]
+nixPkgs = ["php83", "php83Packages.composer"]
 
 [phases.install]
 cmds = ["composer install --ignore-platform-req=ext-mongodb --optimize-autoloader --no-scripts --no-interaction"]
