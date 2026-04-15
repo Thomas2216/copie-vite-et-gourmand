@@ -17,6 +17,9 @@ COPY . .
 
 RUN composer install --ignore-platform-reqs --no-scripts --optimize-autoloader --no-interaction
 
+RUN php bin/console importmap:install
+RUN php bin/console asset-map:compile
+
 EXPOSE 8080
 
-CMD ["sh", "-c", "php bin/console doctrine:schema:update --force --complete && php bin/console importmap:install && php -S 0.0.0.0:8080 -t public/"]
+CMD ["sh", "-c", "php bin/console doctrine:schema:update --force --complete && php -S 0.0.0.0:8080 -t public/"]
