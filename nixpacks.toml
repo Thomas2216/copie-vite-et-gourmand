@@ -3,9 +3,9 @@ nixPkgs = ["php82", "php82Packages.composer", "nodejs", "autoconf", "gcc", "gnum
 
 [phases.install]
 cmds = [
-    "pecl channel-update pecl.php.net || true",
     "yes '' | pecl install mongodb || true",
-    "echo 'extension=mongodb.so' >> $(php --ini | grep 'php.ini' | head -1 | awk '{print $NF}')",
+    "echo 'extension=mongodb.so' >> /nix/store/nv7agllrn6xvfyxqjg5512nj3n18sgqc-php-8.2.27/lib/php.ini",
+    "php -m | grep mongodb",
     "composer install --ignore-platform-reqs --optimize-autoloader --no-interaction"
 ]
 
