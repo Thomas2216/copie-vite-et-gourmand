@@ -1,8 +1,8 @@
 [phases.setup]
-nixPkgs = ["php83", "php83Packages.composer", "php83Extensions.mongodb"]
+nixPkgs = ["php83", "php83Packages.composer", "php83Packages.mongodb"]
 
 [phases.install]
-cmds = ["composer install --optimize-autoloader --no-scripts --no-interaction"]
+cmds = ["composer install --ignore-platform-req=ext-mongodb --optimize-autoloader --no-scripts --no-interaction"]
 
 [start]
 cmd = "php -S 0.0.0.0:$PORT -t public/"
