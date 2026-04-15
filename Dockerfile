@@ -1,6 +1,7 @@
 FROM php:8.2-fpm
 
-RUN apt-get update && apt-get install -y libicu-dev libssl-dev \
+RUN apt-get update && apt-get install -y \
+    libicu-dev libssl-dev git unzip \
     && docker-php-ext-install pdo pdo_mysql opcache \
     && docker-php-ext-configure intl \
     && docker-php-ext-install intl \
