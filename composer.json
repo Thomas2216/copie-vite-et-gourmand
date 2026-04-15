@@ -85,8 +85,12 @@
             "assets:install %PUBLIC_DIR%": "symfony-cmd",
             "importmap:install": "symfony-cmd"
         },
-        "post-install-cmd": [],
-        "post-update-cmd": []
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ]
     },
     "conflict": {
         "symfony/symfony": "*"
