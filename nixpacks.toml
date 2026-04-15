@@ -1,10 +1,11 @@
 [phases.setup]
-nixPkgs = ["php82", "php82Packages.composer", "nodejs"]
+nixPkgs = ["php82", "php82Packages.composer", "nodejs", "autoconf", "gcc", "gnumake", "openssl", "pkg-config"]
 
 [phases.install]
 cmds = [
-    "php -m",
-    "find / -name 'mongodb.so' 2>/dev/null",
+    "pecl channel-update pecl.php.net || true",
+    "yes '' | pecl install mongodb || true",
+    "echo 'extension=mongodb.so' >> $(php --ini | grep 'php.ini' | head -1 | awk '{print $NF}')",
     "composer install --ignore-platform-reqs --optimize-autoloader --no-interaction"
 ]
 
