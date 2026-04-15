@@ -1,9 +1,10 @@
 [phases.setup]
-nixPkgs = ["php82", "php82Packages.composer", "php82Extensions.mongodb", "nodejs"]
+nixPkgs = ["php82", "php82Packages.composer", "nodejs"]
 
 [phases.install]
 cmds = [
-    "echo 'extension=mongodb.so' >> $(php --ini | grep 'Loaded Configuration' | sed -e 's/.*://;s/ //g')",
+    "php -m",
+    "find / -name 'mongodb.so' 2>/dev/null",
     "composer install --ignore-platform-reqs --optimize-autoloader --no-interaction"
 ]
 
