@@ -1,10 +1,9 @@
 [phases.setup]
-nixPkgs = ["php82", "php82Packages.composer", "nodejs", "autoconf", "gcc", "gnumake", "openssl", "pkg-config"]
+nixPkgs = ["php82", "php82Packages.composer", "nodejs", "autoconf", "gcc", "gnumake", "openssl", "pkg-config", "php82Packages.mongodb"]
 
 [phases.install]
 cmds = [
-    "yes '' | pecl install mongodb",
-    "find / -name 'mongodb.so' 2>/dev/null || echo 'mongodb.so NOT FOUND'",
+    "find / -name 'mongodb.so' 2>/dev/null || echo 'NOT FOUND'",
     "composer install --ignore-platform-reqs --optimize-autoloader --no-interaction"
 ]
 
