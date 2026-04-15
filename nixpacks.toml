@@ -2,7 +2,10 @@
 nixPkgs = ["php82", "php82Packages.composer", "php82Extensions.mongodb", "nodejs"]
 
 [phases.install]
-cmds = ["composer install --ignore-platform-reqs --optimize-autoloader --no-interaction"]
+cmds = [
+    "echo 'extension=mongodb.so' >> $(php --ini | grep 'Loaded Configuration' | sed -e 's/.*://;s/ //g')",
+    "composer install --ignore-platform-reqs --optimize-autoloader --no-interaction"
+]
 
 [start]
 cmd = "php -S 0.0.0.0:$PORT -t public/"
