@@ -21,7 +21,7 @@ COPY . .
 
 RUN composer install --ignore-platform-reqs --no-scripts --optimize-autoloader --no-interaction
 
-RUN rm -f .env .env.local .env.prod .env.local.php
+RUN echo "" > .env && rm -f .env.local .env.prod .env.local.php
 
 EXPOSE 8080
 
