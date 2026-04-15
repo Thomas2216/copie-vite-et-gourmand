@@ -19,9 +19,9 @@ RUN composer install --ignore-platform-reqs --no-scripts --optimize-autoloader -
 
 RUN rm -f .env .env.local .env.prod .env.local.php
 
-ENV DATABASE_URL="postgresql://vite_et_gourmand_db_user:***REMOVED***@dpg-d7fv34dckfvc73dap1i0-a/vite_et_gourmand_db?serverVersion=16&charset=utf8&sslmode=require"
 ENV APP_ENV="prod"
 ENV APP_SECRET="***REMOVED***"
+ENV DATABASE_URL="postgresql://vite_et_gourmand_db_user:***REMOVED***@dpg-d7fv34dckfvc73dap1i0-a/vite_et_gourmand_db?serverVersion=16&charset=utf8&sslmode=require"
 
 EXPOSE 8080
 
