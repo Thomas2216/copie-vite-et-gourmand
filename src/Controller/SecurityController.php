@@ -53,11 +53,9 @@ class SecurityController extends AbstractController
     #[Route('/create', name: 'app_create', methods: ['GET', 'POST'])]
     public function create(HttpFoundationRequest $request, EntityManagerInterface $em, MailerInterface $mailer, Security $security): Response
     {
-        // Crée un nouvel utilisateur
         $user = new User();
         $user->setRoles(['ROLE_USER']); // rôle par défaut
 
-        // Crée le formulaire
         $form = $this->createForm(UserType::class, $user);
         $form->add('submit', SubmitType::class, [
             'label' => 'Créer',
@@ -67,10 +65,9 @@ class SecurityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // Hasher le mot de passe avant de persister
             $hashedPassword = $this->passwordHasher->hashPassword(
                 $user,
-                $user->getPassword() // le mot de passe en clair saisi dans le formulaire
+                $user->getPassword()
             );
             $user->setPassword($hashedPassword);
 

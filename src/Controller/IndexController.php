@@ -27,34 +27,6 @@ final class IndexController extends AbstractController
         ]);
     }
 
-    /** #[Route('/login', name: 'app_login')]
-    public function login(): Response
-    {
-        return $this->render('index/login.html.twig');
-    }
-     *
-     **/
-
-    /**  #[Route('/create', name: 'app_create')]
-    public function create(): Response
-    {
-        return $this->render('index/create.html.twig');
-    }
-
-    **/
-
-//    #[Route('/menus', name: 'app_menus')]
-//    public function menus(): Response
-//    {
-//        return $this->render('index/menus.html.twig');
-//    }
-//
-//    #[Route('/menu-detail', name: 'app_menu_detail')]
-//    public function menuDetail(): Response
-//    {
-//        return $this->render('index/menu-detail.html.twig');
-//    }
-
     #[Route('/user', name: 'app_user')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user(CommandeRepository $commandeRepository): Response
@@ -91,22 +63,6 @@ final class IndexController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-    /**
-    #[Route('/admin', name: 'app_admin')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function admin(): Response
-    {
-        return $this->render('index/admin.html.twig');
-    }
-     **/
-
-
-//    #[Route('/commande', name: 'app_commande')]
-//    public function commande(): Response
-//    {
-//        return $this->render('index/commande.html.twig');
-//    }
 
     #[Route('/contact', name: 'app_contact', methods: ['GET', 'POST'])]
     public function contact(Request $request, MailerInterface $mailer): Response

@@ -25,8 +25,6 @@ class CommandeStat
     #[ODM\Field(type: "date")]
     private \DateTime $dateCommande;
 
-    // Getters et Setters
-
     public function getId(): ?string
     {
         return $this->id;

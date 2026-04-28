@@ -58,8 +58,6 @@ class UserCrudController extends AbstractCrudController
             return;
         }
 
-        // EasyAdmin envoie les données sous la clé du nom de la classe (ex: "User")
-        // On cherche plainPassword dans toutes les sous-clés du formulaire
         $allData = $this->requestStack->getCurrentRequest()?->request->all() ?? [];
         $plainPassword = null;
         foreach ($allData as $value) {
