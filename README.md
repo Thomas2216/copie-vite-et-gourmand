@@ -2,7 +2,7 @@
 
 Application web de traiteur en ligne permettant aux clients de commander des menus livrés à domicile.
 
-Développée avec **Symfony 7.4**, **MySQL** et **Bootstrap 5**.
+Développée dans le cadre du **Titre Professionnel DWWM (Développeur Web et Web Mobile)** avec **Symfony 7.4**, **MySQL**, **MongoDB** et **Bootstrap 5**.
 
 ---
 
@@ -10,10 +10,11 @@ Développée avec **Symfony 7.4**, **MySQL** et **Bootstrap 5**.
 
 - **Back-end** : PHP 8.2 / Symfony 7.4
 - **ORM** : Doctrine ORM
-- **Base de données** : MySQL 8.0
-- **Front-end** : Twig / Bootstrap 5.3 / JavaScript ES6
+- **Base de données** : MySQL 8.0 + MongoDB (statistiques NoSQL)
+- **Front-end** : Twig / Bootstrap 5.3 / JavaScript ES6 (Fetch API)
 - **Emails** : Symfony Mailer + Mailtrap (dev)
 - **Admin** : EasyAdmin 4
+- **Outils** : Docker, Composer, Symfony CLI, Flatpickr
 
 ---
 
@@ -22,6 +23,8 @@ Développée avec **Symfony 7.4**, **MySQL** et **Bootstrap 5**.
 - PHP 8.2+
 - Composer
 - MySQL 8.0+
+- MongoDB
+- Docker & Docker Compose
 - Symfony CLI
 
 ---
@@ -55,6 +58,10 @@ Modifier `.env.local` avec vos paramètres :
 # Base de données
 DATABASE_URL="mysql://root:votre_mot_de_passe@127.0.0.1:3306/vite_gourmand"
 
+# MongoDB
+MONGODB_URL="mongodb://localhost:27017"
+MONGODB_DB="vite_gourmand"
+
 # Mailer (Mailtrap pour le dev)
 MAILER_DSN=smtp://username:password@sandbox.smtp.mailtrap.io:587
 
@@ -62,25 +69,31 @@ MAILER_DSN=smtp://username:password@sandbox.smtp.mailtrap.io:587
 ORS_API_KEY=votre_cle_ors
 ```
 
-### 4. Créer la base de données
+### 4. Lancer Docker
+
+```bash
+docker-compose up -d
+```
+
+### 5. Créer la base de données
 
 ```bash
 php bin/console doctrine:database:create
 ```
 
-### 5. Importer le schéma et les données de test
+### 6. Importer le schéma et les données de test
 
 ```bash
 mysql -u root -p vite_gourmand < dump.sql
 ```
 
-### 6. Lancer les migrations
+### 7. Lancer les migrations
 
 ```bash
 php bin/console doctrine:migrations:migrate
 ```
 
-### 7. Lancer le serveur
+### 8. Lancer le serveur
 
 ```bash
 symfony server:start
@@ -108,7 +121,8 @@ Mot de passe pour tous les comptes : `Demo1234!`
 - Inscription / connexion / déconnexion
 - Réinitialisation de mot de passe par email
 - Catalogue des menus avec détail des plats et allergènes
-- Commande en ligne avec panier dynamique (AJAX)
+- Commande en ligne avec panier dynamique (Fetch API / JavaScript vanilla)
+- Sélection de date et créneau horaire (Flatpickr)
 - Calcul automatique des frais de livraison (API OpenRouteService)
 - Réduction 10% appliquée automatiquement selon le nombre de personnes
 - Historique des commandes avec suivi des statuts
@@ -122,16 +136,16 @@ Mot de passe pour tous les comptes : `Demo1234!`
 ### Côté administrateur (ROLE_ADMIN)
 - Panel EasyAdmin : gestion complète des utilisateurs, menus, plats, commandes et avis
 - Modération des avis (valider / refuser)
+- Tableau de bord de statistiques de commandes (MongoDB / NoSQL)
 
 ---
 
 ## Structure du projet
-
-```
 src/
 ├── Controller/          # Controllers Symfony
 │   ├── Admin/           # CRUDs EasyAdmin
 │   └── EmployeController.php
+├── Document/            # Documents MongoDB (statistiques)
 ├── Entity/              # Entités Doctrine
 ├── Form/                # Types de formulaires
 ├── Repository/          # Requêtes personnalisées
@@ -144,10 +158,10 @@ templates/
 └── security/            # Login / inscription
 assets/
 ├── styles/app.css       # Feuille de style principale
-└── app.js               # Logique JavaScript (panier, AJAX)
+└── app.js               # Logique JavaScript (panier, Fetch API)
 migrations/              # Migrations Doctrine versionnées
 dump.sql                 # Schéma et données de démonstration
-```
+docker-compose.yml       # Configuration Docker
 
 ---
 
@@ -156,12 +170,35 @@ dump.sql                 # Schéma et données de démonstration
 | Variable | Description |
 |----------|-------------|
 | `DATABASE_URL` | URL de connexion MySQL |
+| `MONGODB_URL` | URL de connexion MongoDB |
+| `MONGODB_DB` | Nom de la base MongoDB |
 | `MAILER_DSN` | DSN SMTP pour l'envoi d'emails |
 | `ORS_API_KEY` | Clé API OpenRouteService |
 | `APP_SECRET` | Secret Symfony (généré automatiquement) |
 
 ---
 
-## Dépôt GitHub
+## 📸 Captures d'écran
 
-[https://github.com/Thomas2216/Vite-et-gourmand](https://github.com/Thomas2216/Vite-et-gourmand)
+*(placer les images dans un dossier `/screenshots` à la racine du projet)*
+
+| Page | Aperçu |
+|---|---|
+| Accueil | ![Accueil](screenshots/home.png) |
+| Catalogue menus | ![Menus](screenshots/menus.png) |
+| Commande | ![Commande](screenshots/commande.png) |
+| Administration | ![Admin](screenshots/admin.png) |
+| Statistiques | ![Stats](screenshots/stats.png) |
+
+---
+
+## 👨‍💻 Auteur
+
+**Thomas Valle** — Développeur Web PHP/Symfony | TP DWWM
+[LinkedIn](https://www.linkedin.com/in/thomas-valle-dev/) • [GitHub](https://github.com/Thomas2216)
+
+---
+
+## 📄 Licence
+
+Projet réalisé dans un cadre pédagogique — Studi, 2025.
