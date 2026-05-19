@@ -1,4 +1,6 @@
 
+/secrets.txt
+
 ###> symfony/framework-bundle ###
 /.env.dev
 /.env.local
